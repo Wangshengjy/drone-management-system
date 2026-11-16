@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: drone-collab
+  datasource:
+    url: jdbc:mysql://localhost:3306/emergency_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+
+server:
+  port: 8080
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+app:
+  bootstrap:
+    admin-password: 123456
+  jwt:
+    secret: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    expiration-ms: 86400000
+  upload-dir: ${user.dir}/uploads
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/emergency_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
